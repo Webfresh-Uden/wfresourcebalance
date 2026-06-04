@@ -1,38 +1,38 @@
 {
-  "name": "webfresh/resourcebalance",
-  "description": "Resource balance package for Webfresh Laravel Projects",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Roel van Lierop-Megens",
-      "email": "roel.van.lierop@gmail.com"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "WebFresh\\ResourceBalance\\": "src",
-      "WebFresh\\ResourceBalance\\Database\\Factories\\": "database/factories"
-    }
-  },
-  "extra": {
-      "laravel": {
-          "providers": [
-              "WebFresh\\ResourceBalance\\ResourceBalanceServiceProvider"
-          ]
-      }
-  },
-"repositories": [
-    {
-        "url": "https://github.com/Webfresh-Uden/wfusermanager.git",
-        "type": "git"
-    }
-],
-  "require": {
-      "laravel/sanctum": "^4.3",
-      "spatie/laravel-permission": "^7.3",
-      "webfresh/usermanager": "dev-main"
-  },
+    "name": "webfresh/resourcebalance",
+    "description": "Resource balance package for Webfresh Laravel Projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roel van Lierop-Megens",
+            "email": "roel.van.lierop@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "url": "https://github.com/Webfresh-Uden/wfusermanager.git",
+            "type": "git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WebFresh\\ResourceBalance\\": "src",
+            "WebFresh\\ResourceBalance\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WebFresh\\ResourceBalance\\ResourceBalanceServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "laravel/sanctum": "^4.3",
+        "spatie/laravel-permission": "^7.3",
+        "webfresh/usermanager": "dev-main"
+    },
     "require-dev": {
         "orchestra/testbench": "^11.1",
         "phpunit/phpunit": "^12.5",
@@ -44,9 +44,9 @@
             "WebFresh\\ResourceBalance\\Tests\\": "tests/"
         }
     },
-  "config": {
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
-  }
 }
