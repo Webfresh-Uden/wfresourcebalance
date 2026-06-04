@@ -22,9 +22,16 @@
           ]
       }
   },
+"repositories": [
+    {
+        "url": "https://github.com/Webfresh-Uden/wfusermanager.git",
+        "type": "git"
+    }
+],
   "require": {
       "laravel/sanctum": "^4.3",
-      "spatie/laravel-permission": "^7.3"
+      "spatie/laravel-permission": "^7.3",
+      "webfresh/usermanager": "dev-main"
   },
     "require-dev": {
         "orchestra/testbench": "^11.1",
