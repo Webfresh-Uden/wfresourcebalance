@@ -23,12 +23,12 @@ class Balance extends Component
 
     public function mount(): void
     {
-        $this->mutations = Mutation::where('user_id', auth()->id());
     }
 
     #[Layout('layouts.app')]
     public function render(): View
     {
+        $this->mutations = Mutation::where('user_id', auth()->id())->paginate(15);
 
         return view('wfrb::livewire.balance', [
             'mutations' => $this->mutations,
@@ -48,5 +48,15 @@ class Balance extends Component
             }
         }
         return $returnColumns;
+    }
+
+    public function sort($column)
+    {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
     }
 }

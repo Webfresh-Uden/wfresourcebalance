@@ -4,3 +4,9 @@ Resource Balance package for Laravel, based on Laravel, Livewire and Tailwind CS
 WARNING!
 
 Edit your config file before running migrations of the package because the balance fields in the database are generated based on your configuration file;
+
+Run the seeder to get the permissions needed;
+```
+php artisan db:seed --class=ResourceBalanceSeeder
+```
+

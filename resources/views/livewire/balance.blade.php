@@ -3,7 +3,7 @@
         <div class="grid auto-rows-min gap-4 grid-cols-1">
             <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                 <div class="z-10 mt-4 mb-4">
-                    <flux:heading size="xl" level="1" class="ms-4">Team management</flux:heading>
+                    <flux:heading size="xl" level="1" class="ms-4">Resource Balance</flux:heading>
                 </div>
                 <div class="ms-4 me-4">
                     <flux:table :paginate="$mutations" class="z-10 table-fixed">
@@ -16,7 +16,13 @@
                             <flux:table.column sortable :sorted="$sortBy === 'sealbag_reference'" :direction="$sortDirection" wire:click="sort('sealbag_reference')">Sealbag Nr.</flux:table.column>
                             <flux:table.column sortable :sorted="$sortBy === 'external_reference'" :direction="$sortDirection" wire:click="sort('external_reference')">Reference</flux:table.column>
                             @foreach( $dynamicColumns as $column )
-                                <flux:table.column>{{ __(str_replace('balance_', '', $column)) }}</flux:table.column>
+                                <flux:table.column>
+                                    @if( config('wfresourcebalance.use_symbol_as_column_header') )
+                                        {{ config('wfresourcebalance.resources.' . str_replace('balance_', '', $column) . '.symbol') }}
+                                    @else
+                                        {{ __(str_replace('balance_', '', $column)) }}
+                                    @endif
+                                </flux:table.column>
                             @endforeach
                         </flux:table.columns>
                         <flux:table.rows>
