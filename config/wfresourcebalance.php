@@ -3,20 +3,24 @@
 return [
     'resources' => [
         'gold'  => [
-            'type'  => 'precious metal',
-            'symbol' => 'Au'
+            'type'    => 'precious metal',
+            'symbol'  => 'Au',
+            'unit'    => 'gr'
         ],
         'palladium'  => [
-            'type'  => 'precious metal',
-            'symbol' => 'Pd'
+            'type'    => 'precious metal',
+            'symbol'  => 'Pd',
+            'unit'    => 'gr'
         ],
         'silver'  => [
-            'type'  => 'precious metal',
-            'symbol' => 'Ag'
+            'type'    => 'precious metal',
+            'symbol'  => 'Ag',
+            'unit'    => 'gr'
         ],
         'platinum'  => [
-            'type'  => 'precious metal',
-            'symbol' => 'Pt'
+            'type'    => 'precious metal',
+            'symbol'  => 'Pt',
+            'unit'    => 'gr'
         ]
     ]
 ];

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('external_reference')->nullable();
 
             foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject) {
-                $table->decimal($resourceLabel, 10, 2)->default(0);
+                $table->decimal('balance_'.$resourceLabel, 10, 2)->default(0);
             }
 
             $table->timestamps();
