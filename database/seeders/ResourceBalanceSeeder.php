@@ -22,6 +22,11 @@ class ResourceBalanceSeeder extends Seeder
             'permission_group_id' => $permissionGroup->id
         ]);
         DB::table('permissions')->insert([
+            'name' => 'Edit resource balance',
+            'guard_name' => 'web',
+            'permission_group_id' => $permissionGroup->id
+        ]);
+        DB::table('permissions')->insert([
             'name' => 'Buy resources',
             'guard_name' => 'web',
             'permission_group_id' => $permissionGroup->id

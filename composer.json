@@ -18,7 +18,9 @@
     "autoload": {
         "psr-4": {
             "WebFresh\\ResourceBalance\\": "src",
-            "WebFresh\\ResourceBalance\\Database\\Factories\\": "database/factories"
+            "WebFresh\\ResourceBalance\\Tests\\": "vendor/webfresh/resourcebalance/tests/",
+            "WebFresh\\ResourceBalance\\Database\\Factories\\": "vendor/webfresh/resourcebalance/database/factories",
+            "WebFresh\\ResourceBalance\\Database\\Seeders\\": "vendor/webfresh/resourcebalance/database/seeders"
         }
     },
     "extra": {

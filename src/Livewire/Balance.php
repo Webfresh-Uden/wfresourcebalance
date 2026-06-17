@@ -21,6 +21,10 @@ class Balance extends Component
 
     public string $sortDirection = 'desc';
 
+    public bool $showResourceTransferModal = false;
+    public bool $showResourceDepositModal = false;
+    public bool $showResourceWithdrawModal = false;
+
     public function mount(): void
     {
     }
@@ -58,5 +62,46 @@ class Balance extends Component
             $this->sortBy = $column;
             $this->sortDirection = 'asc';
         }
+    }
+
+    public function clearFieldData(): void
+    {
+        $this->id = '';
+    }
+
+    // Transfer modal handling
+    public function showResourceTransfer($resource_id): void
+    {
+        $this->showResourceTransferModal = true;
+    }
+    public function resourceTransferAction(): void
+    {
+        $this->showResourceTransferModal = false;
+
+        Flux::toast(text: __('Resource transferred'));
+    }
+
+    // Deposit modal handling
+    public function showDepositResource($resource_id): void
+    {
+        $this->showResourceDepositModal = true;
+    }
+    public function resourceDepositAction(): void
+    {
+        $this->showResourceDepositModal = false;
+
+        Flux::toast(text: __('Resource deposit planned'));
+    }
+
+    // Withdraw modal handling
+    public function showWithdrawResource($resource_id): void
+    {
+        $this->showResourceWithdrawModal = true;
+    }
+    public function resourceWithdrawAction(): void
+    {
+        $this->showResourceWithdrawModal = false;
+
+        Flux::toast(text: __('Withdrawal planned'));
     }
 }

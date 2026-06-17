@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('resource_name');    // config label
-            $table->decimal('balance', 10, 2)->default(0); // balance with 2 decimal places
+            foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject) {
+                $table->decimal('balance_'.$resourceLabel, 10, 2)->default(0);
+            }
             $table->timestamps();
         });
     }
