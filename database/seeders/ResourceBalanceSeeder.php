@@ -41,6 +41,10 @@ class ResourceBalanceSeeder extends Seeder
             'guard_name' => 'web',
             'permission_group_id' => $permissionGroup->id
         ]);
-
+        DB::table('permissions')->insert([
+            'name' => 'Edit mutations',
+            'guard_name' => 'web',
+            'permission_group_id' => $permissionGroup->id
+        ]);
     }
 }
