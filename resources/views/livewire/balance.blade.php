@@ -5,11 +5,9 @@
                 <div class="z-10 mt-4 mb-4 flex justify-between">
                     <flux:heading size="xl" level="1" class="ms-4">{{ __('Resource Balance') }}</flux:heading>
                     <div class="me-4">
-                        @if( $this->user->hasPermissionTo('Transfer resources') )
-                            <flux:modal.trigger name="resource-transfer">
-                                <flux:button>{{ __('Transfer resources') }}</flux:button>
-                            </flux:modal.trigger>
-                        @endif
+                        <flux:modal.trigger name="resource-transfer">
+                            <flux:button>{{ __('Transfer resources') }}</flux:button>
+                        </flux:modal.trigger>
                         <flux:modal.trigger name="resource-deposit">
                             <flux:button>{{ __('Deposit') }}</flux:button>
                         </flux:modal.trigger>

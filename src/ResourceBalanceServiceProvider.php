@@ -15,6 +15,13 @@ class ResourceBalanceServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Register the command if we are using the application via the CLI
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                WfrbInstallPermissions::class,
+            ]);
+        }
+
         $this->publishes([
             __DIR__.'/../config/wfresourcebalance.php' => config_path('wfresourcebalance.php'),
         ], 'config');
@@ -35,7 +42,7 @@ class ResourceBalanceServiceProvider extends ServiceProvider
             namespace: 'wfrb',
             classNamespace: 'WebFresh\\ResourceBalance\\Livewire',
             classPath: __DIR__.'/Livewire',
-            classViewPath: __DIR__.'/../resources/views/livewire',
+            classViewPath: __DIR__.'/../resources/views/livewire'
         );
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'wfrb');

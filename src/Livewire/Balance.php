@@ -10,7 +10,6 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use WebFresh\ResourceBalance\Models\Mutation;
 use WebFresh\ResourceBalance\Models\Balance as BalanceModel;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 #[Title('Balance')]
@@ -33,7 +32,6 @@ class Balance extends Component
     public $withdrawAmount;
 
     public $id = '';
-    public $user;
 
     #[Validate('string', message: 'Invalid sort field')]
     public string $sortBy = 'created_at';
@@ -48,7 +46,6 @@ class Balance extends Component
 
     public function mount()
     {
-        $this->user = User::with('roles')->first();
         $this->userBalance = BalanceModel::where('user_id', auth()->id())->first();
         $this->userMutations = Mutation::where('user_id', auth()->id())->get();
 
@@ -58,7 +55,10 @@ class Balance extends Component
     public function calculateBalance()
     {
         foreach (config('wfresourcebalance.resources') as $resourceName => $resourceConfig) {
-            $this->balance[$resourceName] = (float)$this->userBalance->{'balance_' . $resourceName};
+            $this->balance[$resourceName] = (float)0;
+            if( $this->userBalance ) {
+                $this->balance[$resourceName] = (float)$this->userBalance->{'balance_' . $resourceName};
+            }
         }
         $dynamicColumns = $this->getDynamicColumns();
         if ($this->userMutations->count() > 0)
@@ -91,7 +91,6 @@ class Balance extends Component
     #[Layout('layouts.app')]
     public function render(): View
     {
-        dump($this->user);
         return view('wfrb::livewire.balance', [
             'mutations' => Mutation::where('user_id', auth()->id())->paginate(15),
             'dynamicColumns' => $this->getDynamicColumns()
