@@ -7,6 +7,7 @@ use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use WebFresh\UserManager\Models\PermissionGroup;
 use WebFresh\UserManager\Models\Team;
 use App;
@@ -40,20 +41,21 @@ class WfrbInstallPermissions extends Command
             $password = $this->secret('What is the password? Save this, you\'ll never see it again.');
         }
 
-        $pg = PermissionGroup::create([
-            'name' => 'Resource Balance',
-        ]);
-
-        foreach( config('wfresourcebalance.permissions') as $permission => $guard ) {
-            Permission::create([
-                'name' => $permission,
-                'guard_name' => 'web',
-                'permission_group_id' => $pg->id,
+        foreach( config('wfusermanager.permissions') as $permissionGroup => $permissionList ) {
+            $pg = PermissionGroup::create([
+                'name' => $permissionGroup,
             ]);
-            $this->info("Permission $permission was created");
+            $this->info("Permission group $permissionGroup was created");
+            foreach ($permissionList as $permission => $guard) {
+                Permission::create([
+                    'name' => $permission,
+                    'guard_name' => 'web',
+                    'permission_group_id' => $pg->id,
+                ]);
+                $this->info("Permission $permission was created");
+            }
         }
 
         $this->info('Installation completed, enjoy!');
-        //
     }
 }

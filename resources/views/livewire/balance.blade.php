@@ -76,15 +76,20 @@
         </div>
     </div>
 
-    <flux:modal name="resource-transfer" class="md:w-96" wire:model.self="showResourceTransferModal" wire:close="clearFieldData()">
+    <flux:modal name="resource-transfer" wire:model.self="showResourceTransferModal" wire:close="clearFieldData()">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">{{ __('Transfer resource') }}</flux:heading>
                 <flux:text class="mt-2">{{ __('Transfer resource to a different user') }}</flux:text>
             </div>
             <form wire:submit="resourceTransferAction">
+                <flux:select wire:change="updateMaxWithdrawAmount" wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
+                    @foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject)
+                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ ucfirst($resourceLabel) }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+                <flux:input max="{{ $withdrawAmount }}" wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
                 <div class="flex">
-                    <flux:spacer />
                     <flux:button type="button" class="me-4" variant="danger" x-on:click="$wire.showResourceTransferModal = false">{{ __('Cancel') }}</flux:button>
                     <flux:button type="submit" variant="primary">{{ __('Transfer resource') }}</flux:button>
                 </div>

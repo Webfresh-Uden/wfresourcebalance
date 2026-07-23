@@ -4,7 +4,7 @@ namespace WebFresh\ResourceBalance;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use WebFresh\UserManager\Console\Commands\WfumInstallCommand;
+use WebFresh\ResourceBalance\Console\Commands\WfrbInstallPermissions;
 
 class ResourceBalanceServiceProvider extends ServiceProvider
 {

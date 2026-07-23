@@ -61,7 +61,7 @@ class Balance extends Component
             }
         }
         $dynamicColumns = $this->getDynamicColumns();
-        if ($this->userMutations->count() > 0)
+        if ($this->userMutations && $this->userMutations->count() > 0)
         {
             foreach ($this->userMutations as $userMutation) {
                 foreach ($dynamicColumns as $column) {
@@ -187,7 +187,10 @@ class Balance extends Component
     public function updateMaxWithdrawAmount(): void
     {
         $this->calculateBalance();
-        $this->withdrawAmount = $this->resourceAmount = $this->balance['balance_'.$this->resourceType];
+        $this->withdrawAmount = $this->resourceAmount = 0;
+        if( isset($this->balance['balance_'.$this->resourceType]) ) {
+            $this->withdrawAmount = $this->resourceAmount = $this->balance['balance_' . $this->resourceType];
+        }
     }
 
     public function resetValues(): void
