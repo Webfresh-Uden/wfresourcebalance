@@ -27,7 +27,9 @@
                 <div class="ms-4 me-4">
                     <flux:table :paginate="$mutations" class="z-10 table-fixed">
                         <flux:table.columns>
-                            <flux:table.column>{{ __('Actions') }}</flux:table.column>
+                            @can('Edit balance lines')
+                                <flux:table.column>{{ __('Actions') }}</flux:table.column>
+                            @endcan
                             <flux:table.column sortable :sorted="$sortBy === 'order_reference'" :direction="$sortDirection" wire:click="sort('order_reference')">{{ __('Order') }}</flux:table.column>
                             <flux:table.column sortable :sorted="$sortBy === 'created_at'" :direction="$sortDirection" wire:click="sort('created_at')">{{ __('Date') }}</flux:table.column>
                             <flux:table.column sortable :sorted="$sortBy === 'invoice_reference'" :direction="$sortDirection" wire:click="sort('invoice_reference')">{{ __('Invoice') }}</flux:table.column>
@@ -48,11 +50,13 @@
                         <flux:table.rows>
                             @foreach( $mutations as $mutation )
                             <flux:table.row wire:key="mutation-{{ $mutation->id }}">
-                                <flux:table.cell>
-                                    <flux:tooltip content="{{ __('Update mutation') }}">
-                                        <flux:icon.pencil-square class="cursor-pointer text-orange-500 inline-block me-4" wire:click="showUpdateMutationWindow({{ $mutation->id }})" />
-                                    </flux:tooltip>
-                                </flux:table.cell>
+                                @can('Edit balance lines')
+                                    <flux:table.cell>
+                                        <flux:tooltip content="{{ __('Update mutation') }}">
+                                            <flux:icon.pencil-square class="cursor-pointer text-gray-500 inline-block me-4" wire:click="showUpdateMutationWindow({{ $mutation->id }})" />
+                                        </flux:tooltip>
+                                    </flux:table.cell>
+                                @endcan
                                 <flux:table.cell>{{ $mutation->order_reference }}</flux:table.cell>
                                 <flux:table.cell>{{ $mutation->created_at }}</flux:table.cell>
                                 <flux:table.cell>{{ $mutation->invoice_reference }}</flux:table.cell>
