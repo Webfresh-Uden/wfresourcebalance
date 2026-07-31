@@ -23,25 +23,7 @@ class WfrbInstallPermissions extends Command
     {
         $this->info('Installing Webfresh Resource Balance permissions...');
 
-        if( !App::isProduction() ) {
-            $confirmed = $this->confirm(
-                'Do you want to use the ENV data to install the permissions?',
-                false);
-        }
-
-        $first_name = env('WFUM_USER_FIRST_NAME', 'Webfresh');
-        $last_name = env('WFUM_USER_LAST_NAME', 'Administrator');
-        $email = env('WFUM_USER_EMAIL', 'roel@webfresh.nl');
-        $password = env('WFUM_USER_PASSWORD', 'WebFresh2026');
-
-        if( $confirmed === false ) {
-            $first_name = $this->ask('What is the first name?');
-            $last_name = $this->ask('What is the last name?');
-            $email = $this->ask('What is the email address?');
-            $password = $this->secret('What is the password? Save this, you\'ll never see it again.');
-        }
-
-        foreach( config('wfusermanager.permissions') as $permissionGroup => $permissionList ) {
+        foreach( config('wfresourcebalance.permissions') as $permissionGroup => $permissionList ) {
             $pg = PermissionGroup::create([
                 'name' => $permissionGroup,
             ]);
