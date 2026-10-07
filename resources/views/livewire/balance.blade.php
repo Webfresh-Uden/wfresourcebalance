@@ -19,7 +19,7 @@
                 <div class="z-10 mt-4 mb-4 flex justify-between">
                     @foreach( $balance as $resource => $amount )
                         <div class="block flex-1 p-4 text-center">
-                            <flux:heading size="lg" level="3">{{ ucfirst($resource) }}</flux:heading>
+                            <flux:heading size="lg" level="3">{{ __( ucfirst($resource) ) }}</flux:heading>
                             <flux:text>{{ number_format($amount, 2) }}</flux:text>
                         </div>
                     @endforeach
@@ -40,7 +40,7 @@
                             @foreach( $dynamicColumns as $column )
                                 <flux:table.column>
                                     @if( config('wfresourcebalance.use_symbol_as_column_header') )
-                                        {{ config('wfresourcebalance.resources.' . str_replace('balance_', '', $column) . '.symbol') }}
+                                        {{ __( config('wfresourcebalance.resources.' . str_replace('balance_', '', $column) . '.symbol') ) }}
                                     @else
                                         {{ __(str_replace('balance_', '', $column)) }}
                                     @endif
@@ -89,7 +89,7 @@
             <form wire:submit="resourceTransferAction">
                 <flux:select wire:change="updateMaxWithdrawAmount" wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
                     @foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject)
-                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ ucfirst($resourceLabel) }}</flux:select.option>
+                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ __( ucfirst($resourceLabel) ) }}</flux:select.option>
                     @endforeach
                 </flux:select>
                 <flux:input max="{{ $withdrawAmount }}" wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
@@ -110,7 +110,7 @@
             <form wire:submit="resourceDepositAction">
                 <flux:select wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
                     @foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject)
-                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ ucfirst($resourceLabel) }}</flux:select.option>
+                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ __(ucfirst($resourceLabel)) }}</flux:select.option>
                     @endforeach
                 </flux:select>
                 <flux:input wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
@@ -134,7 +134,7 @@
             <form wire:submit="resourceWithdrawAction">
                 <flux:select wire:change="updateMaxWithdrawAmount" wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
                     @foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject)
-                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ ucfirst($resourceLabel) }}</flux:select.option>
+                        <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ __(ucfirst($resourceLabel)) }}</flux:select.option>
                     @endforeach
                 </flux:select>
                 <flux:input max="{{ $withdrawAmount }}" wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />

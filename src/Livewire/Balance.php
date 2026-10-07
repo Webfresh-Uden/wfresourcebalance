@@ -171,9 +171,9 @@ class Balance extends Component
     public function resourceWithdrawAction(): void
     {
         Mutation::create([
-            'user_id' => auth()->id(),
-            'description' => $this->description,
-            'status'  => 'Withdraw requested',
+            'user_id'       => auth()->id(),
+            'description'   => $this->description,
+            'status'        => 'Withdraw requested',
             'balance_' . $this->resourceType => -$this->resourceAmount,
         ]);
 
@@ -181,6 +181,7 @@ class Balance extends Component
 
         // Cleanup and notification
         $this->showResourceWithdrawModal = false;
+
         Flux::toast(text: __('Withdrawal planned'));
     }
 
@@ -188,7 +189,7 @@ class Balance extends Component
     {
         $this->calculateBalance();
         $this->withdrawAmount = $this->resourceAmount = 0;
-        if( isset($this->balance['balance_'.$this->resourceType]) ) {
+        if( isset($this->balance['balance_'.$this->resourceType]) ){
             $this->withdrawAmount = $this->resourceAmount = $this->balance['balance_' . $this->resourceType];
         }
     }

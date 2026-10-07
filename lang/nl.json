@@ -30,7 +30,7 @@
     "Description": "Beschrijving",
     "Enter description": "Beschrijving invoeren",
     "Select status": "Status selecteren",
-    "Withdrawal requested": "Opname aangevraagd",
+    "Withdraw requested": "Opname aangevraagd",
     "Deposit requested": "Storting aangevraagd",
     "Transfer requested": "Overschrijving aangevraagd",
     "Processing": "In behandeling",
@@ -40,5 +40,13 @@
     "Actions": "Acties",
     "Mutation updated": "Mutatie bijgewerkt",
     "Update mutation": "Mutatie bijwerken",
-    "Update your mutation": "Werk hier uw mutatie bij"
+    "Update your mutation": "Werk hier uw mutatie bij",
+    "Gold": "Goud",
+    "Silver": "Zilver",
+    "Platinum": "Platina",
+    "Palladium": "Palladium",
+    "Au": "Goud",
+    "Ag": "Zilver",
+    "Pt": "Platina",
+    "Pd": "Palladium"
 }

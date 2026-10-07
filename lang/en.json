@@ -30,7 +30,7 @@
     "Description": "Description",
     "Enter description": "Enter description",
     "Select status": "Select status",
-    "Withdrawal requested": "Withdrawal requested",
+    "Withdraw requested": "Withdraw requested",
     "Deposit requested": "Deposit requested",
     "Transfer requested": "Transfer requested",
     "Processing": "Processing",
@@ -40,5 +40,13 @@
     "Actions": "Actions",
     "Mutation updated": "Mutation updated",
     "Update mutation": "Update mutation",
-    "Update your mutation": "Update your mutation"
+    "Update your mutation": "Update your mutation",
+    "Gold": "Gold",
+    "Silver": "Silver",
+    "Platinum": "Platinum",
+    "Palladium": "Palladium",
+    "Au": "Gold",
+    "Ag": "Silver",
+    "Pt": "Platinum",
+    "Pd": "Palladium"
 }
