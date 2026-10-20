@@ -4,6 +4,7 @@ namespace WebFresh\ResourceBalance\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Balance extends Model
@@ -23,5 +24,17 @@ class Balance extends Model
         });
 
         return $columns;
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnlyDirty()
+            ->useLogName('Webfresh Resource Balance: Balance')
+            ->logAll()
+            ->logExcept([
+                'created_at',
+                'updated_at'
+            ]);
     }
 }

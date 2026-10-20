@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use WebFresh\ResourceBalance\Mail\depositRequested;
+use WebFresh\ResourceBalance\Mail\withdrawRequested;
 use WebFresh\ResourceBalance\Models\Mutation;
 use WebFresh\ResourceBalance\Models\Balance as BalanceModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 #[Title('Balance')]
 class Balance extends Component
@@ -147,7 +151,7 @@ class Balance extends Component
     }
     public function resourceDepositAction(): void
     {
-        Mutation::create([
+        $mutation = Mutation::create([
             'user_id' => auth()->id(),
             'description' => $this->description,
             'status'  => 'Deposit requested',
@@ -156,6 +160,10 @@ class Balance extends Component
         ]);
 
         $this->calculateBalance();
+
+        if($mutation) {
+            Mail::to(request()->user())->send(new depositRequested($mutation));
+        }
 
         // Cleanup and notification
         $this->showResourceDepositModal = false;
@@ -170,7 +178,7 @@ class Balance extends Component
     }
     public function resourceWithdrawAction(): void
     {
-        Mutation::create([
+        $mutation = Mutation::create([
             'user_id'       => auth()->id(),
             'description'   => $this->description,
             'status'        => 'Withdraw requested',
@@ -178,6 +186,10 @@ class Balance extends Component
         ]);
 
         $this->calculateBalance();
+
+        if($mutation) {
+            Mail::to(request()->user())->send(new withdrawRequested($mutation));
+        }
 
         // Cleanup and notification
         $this->showResourceWithdrawModal = false;
