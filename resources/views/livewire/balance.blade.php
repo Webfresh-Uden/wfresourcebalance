@@ -5,15 +5,21 @@
                 <div class="z-10 mt-4 mb-4 flex justify-between">
                     <flux:heading size="xl" level="1" class="ms-4">{{ __('Resource Balance') }}</flux:heading>
                     <div class="me-4">
-                        <flux:modal.trigger name="resource-transfer">
-                            <flux:button>{{ __('Transfer resources') }}</flux:button>
-                        </flux:modal.trigger>
-                        <flux:modal.trigger name="resource-deposit">
-                            <flux:button>{{ __('Deposit') }}</flux:button>
-                        </flux:modal.trigger>
-                        <flux:modal.trigger name="resource-withdraw">
-                            <flux:button>{{ __('Withdraw') }}</flux:button>
-                        </flux:modal.trigger>
+                        @can('Transfer Resources')
+                            <flux:modal.trigger name="resource-transfer">
+                                <flux:button>{{ __('Transfer resources') }}</flux:button>
+                            </flux:modal.trigger>
+                        @endcan
+                        @can('Deposit Resources')
+                            <flux:modal.trigger name="resource-deposit">
+                                <flux:button>{{ __('Deposit') }}</flux:button>
+                            </flux:modal.trigger>
+                        @endcan
+                        @can('Withdraw Resources')
+                            <flux:modal.trigger name="resource-withdraw">
+                                <flux:button>{{ __('Withdraw') }}</flux:button>
+                            </flux:modal.trigger>
+                        @endcan
                     </div>
                 </div>
                 <div class="z-10 mt-4 mb-4 flex justify-between">

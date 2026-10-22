@@ -36,6 +36,10 @@ return [
     'permissions' => [
         'Resource Balance' => [
             'View resource balance' => 'web',
+            'Edit balance lines' => 'web',
+            'Deposit Resources' => 'web',
+            'Withdraw Resources' => 'web',
+            'Transfer Resources' => 'web',
         ],
     ],
 ];

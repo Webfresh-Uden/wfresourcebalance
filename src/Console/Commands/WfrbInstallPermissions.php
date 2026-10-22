@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use WebFresh\UserManager\Models\PermissionGroup;
-use WebFresh\UserManager\Models\Team;
 use App;
 
 #[Signature('wfrb:installpermissions')]
