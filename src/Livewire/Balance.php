@@ -183,9 +183,11 @@ class Balance extends Component
             'balance_' . $this->resourceType => -$this->resourceAmount,
         ]);
 
-        // Replace this with trait functionality to notify whomever
-        $user = User::where('email', 'winkel@juwelier-dickerscheid.nl')->first();
-        $user->notify(new ConfirmMutation($mutation));
+        $users = User::permission('Recieve Mutation Requests')->get();
+        foreach ($users as $user)
+        {
+            $user->notify(new ConfirmMutation($mutation));
+        }
 
         $this->calculateBalance();
 
