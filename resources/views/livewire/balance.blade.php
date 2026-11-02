@@ -93,6 +93,40 @@
                     @endforeach
                 </flux:select>
                 <flux:input max="{{ $withdrawAmount }}" wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
+
+                <flux:select variant="listbox" searchable placeholder="{{ __('Select address') }}">
+                    @foreach( $addresses as $address )
+                        <flux:select.option value="{{ $address->id }}" wire:key="{{ $address->id }}">{{ $address->name }}, {{ $address->street }} {{ $address->house_number }}, {{ $address->postal_code }} {{ $address->city }}, {{ $address->country }}</flux:select.option>
+                    @endforeach
+                </flux:select>
+
+                <flux:field>
+                    <flux:label>Name</flux:label>
+                    <flux:input size="sm" wire:model="name" />>
+                    <flux:error name="name" />
+                </flux:field>
+
+                <flux:field>
+                    <flux:label>Street</flux:label>
+                    <flux:input size="sm" wire:model="street" />
+                    <flux:error name="street" />
+                </flux:field>
+                <flux:field>
+                    <flux:label>House Number</flux:label>
+                    <flux:input size="sm" wire:model="house_number" />
+                    <flux:error name="house_number" />
+                </flux:field>
+                <flux:field>
+                    <flux:label>Postal Code</flux:label>
+                    <flux:input size="sm" wire:model="postal_code" />
+                    <flux:error name="postal_code" />
+                </flux:field>
+                <flux:field>
+                    <flux:label>City</flux:label>
+                    <flux:input size="sm" wire:model="city" />
+                    <flux:error name="city" />
+                </flux:field>
+
                 <div class="flex">
                     <flux:button type="button" class="me-4" variant="danger" x-on:click="$wire.showResourceTransferModal = false">{{ __('Cancel') }}</flux:button>
                     <flux:button type="submit" variant="primary">{{ __('Transfer resource') }}</flux:button>
@@ -117,6 +151,7 @@
                 <flux:input wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
                 <flux:textarea wire:model="description" label="{{ __('Description') }}" placeholder="{{ __('Enter description') }}" class="mb-4" />
                 <flux:input wire:model="sealbagReference" label="{{ __('Sealbag reference') }}" placeholder="{{ __('Enter sealbag reference') }}" class="mb-4" />
+
                 <div class="flex">
                     <flux:spacer />
                     <flux:button type="button" class="me-4" variant="danger" x-on:click="$wire.showResourceDepositModal = false">{{ __('Cancel') }}</flux:button>

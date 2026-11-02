@@ -38,6 +38,8 @@ class Balance extends Component
 
     public $id = '';
 
+    public $name, $street, $house_number, $postal_code, $city, $address_id, $addresses;
+
     #[Validate('string', message: 'Invalid sort field')]
     public string $sortBy = 'created_at';
 
@@ -53,6 +55,7 @@ class Balance extends Component
     {
         $this->userBalance = BalanceModel::where('user_id', auth()->id())->first();
         $this->userMutations = Mutation::where('user_id', auth()->id())->get();
+        $this->addresses = Address::where('user_id', auth()->id())->get();
 
         $this->calculateBalance();
     }
@@ -137,8 +140,26 @@ class Balance extends Component
         $this->resetValues();
         $this->showResourceTransferModal = true;
     }
+
     public function resourceTransferAction(): void
     {
+        $address = Address::create([
+            'user_id' => auth()->id(),
+            'name' => $this->name,
+            'street' => $this->street,
+            'house_number' => $this->house_number,
+            'postal_code' => $this->postal_code,
+            'city' => $this->city,
+        ]);
+
+        $mutation = Mutation::create([
+            'user_id' => auth()->id(),
+            'description' => $this->description,
+            'status'  => 'Transfer requested',
+            'address_id' => $address->id,
+            'balance_' . $this->resourceType => -$this->resourceAmount,
+        ]);
+
         // Cleanup and notification
         $this->showResourceTransferModal = false;
         Flux::toast(text: __('Resource transferred'));
@@ -150,6 +171,7 @@ class Balance extends Component
         $this->resetValues();
         $this->showResourceDepositModal = true;
     }
+
     public function resourceDepositAction(): void
     {
         $mutation = Mutation::create([
