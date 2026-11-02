@@ -108,11 +108,12 @@
                 <flux:text class="mt-2">{{ __('Deposit resource into your account') }}</flux:text>
             </div>
             <form wire:submit="resourceDepositAction">
-                <flux:select wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
+                <flux:select wire:change="updateMaxDepositAmount" wire:model.live="resourceType" size="sm" label="{{ __('Material') }}" placeholder="{{ __('Select material') }}" class="mb-4">
                     @foreach(config('wfresourcebalance.resources') as $resourceLabel => $resourceObject)
                         <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ __(ucfirst($resourceLabel)) }}</flux:select.option>
                     @endforeach
                 </flux:select>
+                {{ $lastMutation }}
                 <flux:input wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
                 <flux:textarea wire:model="description" label="{{ __('Description') }}" placeholder="{{ __('Enter description') }}" class="mb-4" />
                 <flux:input wire:model="sealbagReference" label="{{ __('Sealbag reference') }}" placeholder="{{ __('Enter sealbag reference') }}" class="mb-4" />
@@ -137,6 +138,7 @@
                         <flux:select.option value="{{ $resourceLabel }}" wire:key="{{ $resourceObject['symbol'] }}">{{ __(ucfirst($resourceLabel)) }}</flux:select.option>
                     @endforeach
                 </flux:select>
+                {{ $lastMutation }}
                 <flux:input max="{{ $withdrawAmount }}" wire:model="resourceAmount" label="{{ __('Amount') }}" placeholder="{{ __('Enter amount') }}" class="mb-4" />
                 <flux:textarea wire:model="description" label="{{ __('Description') }}" placeholder="{{ __('Enter description') }}" class="mb-4" />
                 <div class="flex">

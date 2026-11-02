@@ -9,6 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use WebFresh\ResourceBalance\Models\Mutation;
+use WebFresh\MetalPriceApi\Models\Snapshot;
 use WebFresh\ResourceBalance\Models\Balance as BalanceModel;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ConfirmMutation;
@@ -32,6 +33,8 @@ class Balance extends Component
 
     // Max withdraw amount for a resource
     public $withdrawAmount;
+
+    public $lastMutation;
 
     public $id = '';
 
@@ -197,9 +200,15 @@ class Balance extends Component
         Flux::toast(text: __('Withdrawal planned'));
     }
 
+    public function updateMaxDepositAmount(): void
+    {
+        $this->lastMutation = Snapshot::all()->sortByDesc('created_at')->first();
+    }
+
     public function updateMaxWithdrawAmount(): void
     {
         $this->calculateBalance();
+        $this->lastMutation = Snapshot::all()->sortByDesc('created_at')->first();
         $this->withdrawAmount = $this->resourceAmount = 0;
         if( isset($this->balance['balance_'.$this->resourceType]) ){
             $this->withdrawAmount = $this->resourceAmount = $this->balance['balance_' . $this->resourceType];
